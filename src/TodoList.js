@@ -36,7 +36,7 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
-  todoList: PropTypes.array,
+  todoList: PropTypes.object,
   editListName: PropTypes.func,
   onFinishedChanged: PropTypes.func,
   deleteItem: PropTypes.func,
@@ -46,13 +46,24 @@ TodoList.propTypes = {
 };
 
 TodoList.defaultProps = {
-  todoList: [{}],
-  editListName: this.props.editListName,
-  onFinishedChanged: this.props.onFinishedChanged,
-  deleteItem: this.props.deleteItem,
-  editItem: this.props.editItem,
-  deleteList: this.props.deleteList,
-  addItem: this.props.addItem,
+  todoList: {
+    name: 'TodoList 1',
+    numTodo: 1,
+    numFinished: 0,
+    numNotFinished: 1,
+    todos: [
+      {
+        name: 'Untitled TodoItem',
+        isFinished: false,
+      },
+    ],
+  },
+  editListName: null,
+  onFinishedChanged: null,
+  deleteItem: null,
+  editItem: null,
+  deleteList: null,
+  addItem: null,
 };
 
 export default TodoList;

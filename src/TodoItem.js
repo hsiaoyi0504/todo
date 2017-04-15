@@ -46,10 +46,10 @@ TodoItem.propTypes = {
 
 TodoItem.defaultProps = {
   task: 'None',
-  isFinished: false,
-  onFinishedChanged: this.props.onFinishedChanged,
-  editItem: this.props.editItem,
-  deleteItem: this.props.deleteItem,
+  isFinished: null,
+  onFinishedChanged: null,
+  editItem: null,
+  deleteItem: null,
 };
 
 export default TodoItem;
