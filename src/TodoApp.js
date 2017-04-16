@@ -30,7 +30,7 @@ class TodoApp extends Component {
               isFinished: false,
             },
           ],
-        }
+        },
       ],
     };
   }
