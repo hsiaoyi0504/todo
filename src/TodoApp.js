@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './TodoApp.css';
+import './css/TodoApp.css';
 import TodoList from './TodoList';
 
 class TodoApp extends Component {
@@ -19,6 +19,18 @@ class TodoApp extends Component {
             },
           ],
         },
+        {
+          name: 'TodoList 2',
+          numTodo: 1,
+          numFinished: 0,
+          numNotFinished: 1,
+          todos: [
+            {
+              name: 'Untitled TodoItem',
+              isFinished: false,
+            },
+          ],
+        }
       ],
     };
   }
@@ -149,12 +161,13 @@ class TodoApp extends Component {
     return (
       <div className="TodoApp">
         <div className="App-header">
-          <h2>Todos</h2>
-          <button onClick={this.addList}>Add TodoList</button>
+          <h1>Todos</h1>
+          <button id="addListButton" onClick={this.addList}>Add Todo List</button>
         </div>
-        {
-          todoLists.map((todoList, index) =>
+        <div className="flex-container">
+          {todoLists.map((todoList, index) =>
             <TodoList
+              className="flex-item"
               todoList={todoList}
               key={index}
               editListName={event => this.editListName(event, index)}
@@ -164,8 +177,8 @@ class TodoApp extends Component {
               editItem={(event, indexItem) => this.editItem(event, index, indexItem)}
               onFinishedChanged={indexItem => this.onFinishedChanged(index, indexItem)}
             />,
-          )
-        }
+          )}
+        </div>
       </div>
     );
   }

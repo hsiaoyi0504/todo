@@ -11,10 +11,6 @@ img {
     float: right;
 }
 
-.img-left {
-    float: left;
-}
-
 .half-transparent {
     opacity: 0.5;
 }

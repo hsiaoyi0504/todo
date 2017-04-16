@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './TodoItem.css';
-import deleteIcon from './delete.svg';
-import check from './check.svg';
-import notCheck from './notCheck.svg';
+import './css/TodoItem.css';
+import deleteIcon from './img/delete.svg';
+import check from './img/check.svg';
+import notCheck from './img/notCheck.svg';
 
 class TodoItem extends Component {
   render() {
@@ -13,14 +13,14 @@ class TodoItem extends Component {
           <img
             src={check}
             alt="checked"
-            className="img-left check"
+            className="check"
             onClick={this.props.onFinishedChanged}
           />
           ) : (
             <img
               src={notCheck}
               alt="not-checked"
-              className="img-left check"
+              className="check"
               onClick={this.props.onFinishedChanged}
             />
           )}

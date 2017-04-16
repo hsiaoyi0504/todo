@@ -1,0 +1,42 @@
+input {
+    text-align: center;
+}
+
+img {
+    vertical-align: top;
+}
+
+.items {
+    margin-top: 20px;
+}
+
+#deleteListBtn {
+    width: 25px;
+    vertical-align: top;
+}
+
+.TodoList {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #008CBA;
+    clear: both;
+}
+
+.TodoListTitle {
+    font-size: 20px;
+}
+
+.AddItem {
+    /*float: right;*/
+    text-align: center;
+    float: right;
+    width: 35px;
+    margin: auto 0;
+}
+
+.clear {
+    clear: both;
+}
