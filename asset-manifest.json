@@ -1,7 +1,13 @@
 {
-  "main.css": "static/css/main.9a0fe4f1.css",
-  "main.css.map": "static/css/main.9a0fe4f1.css.map",
-  "main.js": "static/js/main.4e367521.js",
-  "main.js.map": "static/js/main.4e367521.js.map",
-  "static/media/logo.svg": "static/media/logo.5d5d9eef.svg"
+  "main.css": "static/css/main.5baf9a52.css",
+  "main.css.map": "static/css/main.5baf9a52.css.map",
+  "main.js": "static/js/main.2ce901ec.js",
+  "main.js.map": "static/js/main.2ce901ec.js.map",
+  "static/media/add.svg": "static/media/add.20e73374.svg",
+  "static/media/check.svg": "static/media/check.be11e3a2.svg",
+  "static/media/check_box.svg": "static/media/check_box.21d3de8e.svg",
+  "static/media/check_box_outline_blank.svg": "static/media/check_box_outline_blank.99f063e2.svg",
+  "static/media/delete.svg": "static/media/delete.3692f35f.svg",
+  "static/media/deleteList.svg": "static/media/deleteList.41fcf506.svg",
+  "static/media/notCheck.svg": "static/media/notCheck.069a9f81.svg"
 }
