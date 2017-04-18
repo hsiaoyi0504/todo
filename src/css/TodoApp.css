@@ -16,8 +16,9 @@
 
 .App-header {
   background-color: #222;
-  height: 120px;
-  padding: 20px;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 40px;
   color: white;
 }
 

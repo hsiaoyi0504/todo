@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import './css/TodoApp.css';
 import TodoList from './TodoList';
+import TodoSummary from './TodoSummary';
 
 class TodoApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      total: 9,
+      totalFinished: 3,
+      totalNotFinished: 6,
       todoLists: [
         {
           name: 'TodoList 1',
-          numTodo: 1,
-          numFinished: 0,
+          numTodo: 2,
+          numFinished: 1,
           numNotFinished: 1,
           todos: [
             {
-              name: 'Untitled TodoItem',
+              name: 'TodoItem 1',
               isFinished: false,
+            },
+            {
+              name: 'TodoItem 2',
+              isFinished: true,
             },
           ],
         },
@@ -26,8 +34,56 @@ class TodoApp extends Component {
           numNotFinished: 1,
           todos: [
             {
-              name: 'Untitled TodoItem',
+              name: 'TodoItem 3',
               isFinished: false,
+            },
+          ],
+        },
+        {
+          name: 'TodoList 3',
+          numTodo: 3,
+          numFinished: 0,
+          numNotFinished: 3,
+          todos: [
+            {
+              name: 'TodoItem 4',
+              isFinished: false,
+            },
+            {
+              name: 'TodoItem 5',
+              isFinished: false,
+            },
+            {
+              name: 'TodoItem 6',
+              isFinished: false,
+            },
+          ],
+        },
+        {
+          name: 'TodoList 4',
+          numTodo: 2,
+          numFinished: 1,
+          numNotFinished: 1,
+          todos: [
+            {
+              name: 'TodoItem 7',
+              isFinished: true,
+            },
+            {
+              name: 'TodoItem 8',
+              isFinished: false,
+            },
+          ],
+        },
+        {
+          name: 'TodoList 5',
+          numTodo: 1,
+          numFinished: 1,
+          numNotFinished: 0,
+          todos: [
+            {
+              name: 'TodoItem 9',
+              isFinished: true,
             },
           ],
         },
@@ -36,10 +92,13 @@ class TodoApp extends Component {
   }
 
   onFinishedChanged = (indexList, indexItem) => {
-    const { name, numTodo, numFinished, numNotFinished, todos } = this.state.todoLists[indexList];
+    const { totalFinished, totalNotFinished, todoLists } = this.state;
+    const { name, numTodo, numFinished, numNotFinished, todos } = todoLists[indexList];
     const { isFinished } = todos[indexItem];
     const nameItem = todos[indexItem].name;
     this.setState({
+      totalFinished: isFinished ? totalFinished - 1 : totalFinished + 1,
+      totalNotFinished: isFinished ? totalNotFinished + 1 : totalNotFinished - 1,
       todoLists: this.state.todoLists.slice(0, indexList)
       .concat({
         name,
@@ -58,8 +117,11 @@ class TodoApp extends Component {
   }
 
   addList = () => {
+    const { total, totalNotFinished, todoLists } = this.state;
     this.setState({
-      todoLists: this.state.todoLists
+      total: total + 1,
+      totalNotFinished: totalNotFinished + 1,
+      todoLists: todoLists
       .concat(
         {
           name: 'Untitled TodoList',
@@ -78,9 +140,14 @@ class TodoApp extends Component {
   }
 
   deleteList = (index) => {
+    const { todoLists, total, totalFinished, totalNotFinished } = this.state;
+    const { numTodo, numFinished, numNotFinished } = todoLists[index];
     this.setState({
-      todoLists: this.state.todoLists.slice(0, index)
-      .concat(this.state.todoLists.slice(index + 1)),
+      total: total - numTodo,
+      totalFinished: totalFinished - numFinished,
+      totalNotFinished: totalNotFinished - numNotFinished,
+      todoLists: todoLists.slice(0, index)
+      .concat(todoLists.slice(index + 1)),
     });
   }
 
@@ -100,8 +167,11 @@ class TodoApp extends Component {
   }
 
   addItem = (indexList) => {
-    const { name, numTodo, numFinished, numNotFinished, todos } = this.state.todoLists[indexList];
+    const { todoLists, total, totalNotFinished } = this.state;
+    const { name, numTodo, numFinished, numNotFinished, todos } = todoLists[indexList];
     this.setState({
+      total: total + 1,
+      totalNotFinished: totalNotFinished + 1,
       todoLists: this.state.todoLists.slice(0, indexList)
       .concat({
         name,
@@ -120,9 +190,13 @@ class TodoApp extends Component {
   }
 
   deleteItem = (indexList, indexItem) => {
-    const { name, numTodo, numFinished, numNotFinished, todos } = this.state.todoLists[indexList];
+    const { todoLists, total, totalFinished, totalNotFinished } = this.state;
+    const { name, numTodo, numFinished, numNotFinished, todos } = todoLists[indexList];
     const { isFinished } = todos[indexItem];
     this.setState({
+      total: total - 1,
+      totalFinished: isFinished ? totalFinished - 1 : totalFinished,
+      totalNotFinished: isFinished ? totalNotFinished : totalNotFinished - 1,
       todoLists: this.state.todoLists.slice(0, indexList)
       .concat({
         name,
@@ -157,25 +231,26 @@ class TodoApp extends Component {
   }
 
   render() {
-    const todoLists = this.state.todoLists;
+    const { todoLists, total, totalFinished, totalNotFinished } = this.state;
     return (
       <div className="TodoApp">
         <div className="App-header">
           <h1>Todos</h1>
           <button id="addListButton" onClick={this.addList}>Add Todo List</button>
         </div>
+        <TodoSummary total={total} numFinished={totalFinished} numNotFinished={totalNotFinished} />
         <div className="flex-container">
-          {todoLists.map((todoList, index) =>
+          {todoLists.map((todoList, indexList) =>
             <TodoList
               className="flex-item"
               todoList={todoList}
-              key={index}
-              editListName={event => this.editListName(event, index)}
-              deleteList={() => this.deleteList(index)}
-              addItem={() => this.addItem(index)}
-              deleteItem={indexItem => this.deleteItem(index, indexItem)}
-              editItem={(event, indexItem) => this.editItem(event, index, indexItem)}
-              onFinishedChanged={indexItem => this.onFinishedChanged(index, indexItem)}
+              key={indexList}
+              editListName={event => this.editListName(event, indexList)}
+              deleteList={() => this.deleteList(indexList)}
+              addItem={() => this.addItem(indexList)}
+              deleteItem={indexItem => this.deleteItem(indexList, indexItem)}
+              editItem={(event, indexItem) => this.editItem(event, indexList, indexItem)}
+              onFinishedChanged={indexItem => this.onFinishedChanged(indexList, indexItem)}
             />,
           )}
         </div>

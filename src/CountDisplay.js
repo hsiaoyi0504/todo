@@ -16,7 +16,7 @@ class CountDisplay extends Component {
           <img className="count-todo" src={notChecked} alt="notChecked" />
           {this.props.numNotFinished}
         </span>
-        <p>Total: {this.props.numTodo}</p>
+        <p>subtotal: {this.props.numTodo}</p>
       </div>
     );
   }
