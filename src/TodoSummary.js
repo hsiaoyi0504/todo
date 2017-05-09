@@ -17,7 +17,7 @@ class TodoSummary extends Component {
 TodoSummary.propTypes = {
   total: PropTypes.number,
   numFinished: PropTypes.number,
-  numNotFinished: PropTypes.numer,
+  numNotFinished: PropTypes.number,
 };
 
 TodoSummary.defaultProps = {
